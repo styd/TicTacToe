@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'tic_tac_toe/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "tic_tac_toe"
+  spec.name          = "tictactoe_gem"
   spec.version       = TicTacToe::VERSION
   spec.authors       = ["Adrian Setyadi"]
   spec.email         = ["a.styd@yahoo.com"]

@@ -2,7 +2,11 @@
 
 ## Installation
 
-    $ gem install ttt
+    $ gem install tictactoe_gem
+
+## Play it
+
+    $ ttt
 
 ## Development
 
