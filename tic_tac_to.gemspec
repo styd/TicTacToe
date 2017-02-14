@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Adrian Setyadi"]
   spec.email         = ["a.styd@yahoo.com"]
 
-  spec.summary       = %q{Tic Tac Toe}
+  spec.summary       = %q{Tic Tac Toe on the terminal}
   spec.description   = %q{Try to create a line horizontally, vertically, or diagonally with your symbol. Fun game!}
   spec.homepage      = "https://github.com/styd/TicTacToe"
   spec.license       = "MIT"
