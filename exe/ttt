@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+require 'tic_tac_toe'
+
+# Take arguments from STDIN
+# Examples of how this program should be called from the terminal:
+#   $ ./ttt.rb 3 "['x', 'o', 'v']" "['Agus', 'Budi', 'Chandra']"
+#   $ ./ttt.rb 4 "['x', 'o', 'v', 'w', 'y']"
+#   $ ./ttt.rb 6 "['x', 'o', 'v']"
+#   $ ./ttt.rb 5
+#   $ ./ttt.rb
+size = ARGV.shift
+symbols = ARGV.shift
+players = ARGV.shift
+
+# Let's play it
+TicTacToe::Game.play size, symbols, players
