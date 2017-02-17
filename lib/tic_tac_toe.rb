@@ -10,7 +10,7 @@ module TicTacToe
   # COLOR = :off # Use this if your terminal output looks gibberish if COLOR == :on
 
   class Player
-    COLOR_SET = [*(91..96)].cycle
+    COLOR_SET = [*(31..36)].cycle
 
     @@num_of_registered_players = 0
     @@color = COLOR_SET.each
