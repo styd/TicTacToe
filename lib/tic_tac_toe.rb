@@ -160,17 +160,15 @@ module TicTacToe
         until pos_marked do
           refresh_screen
           show_play_table
-
-          puts "Type: <#{italicize("row")}>,<#{italicize("column")}>"
-          puts
-          print colorize(current_player.name) + ": "
+          show_note
+          prompt
           # Get input
           begin
             input = gets
             if input.nil? # Ctrl + D pressed
               raise Interrupt
             else
-              typed_text = input.chomp
+              typed_text = input.chomp.strip
             end
           rescue SystemExit, Interrupt # Ctrl + C pressed or program/ruby failure
             forced_to_quit
@@ -224,6 +222,15 @@ module TicTacToe
     #
     # Screen related methods
     #
+    def show_note
+      puts "Type: <#{italicize("row")}>,<#{italicize("column")}>"
+      puts
+    end
+
+    def prompt
+      print "\r #{colorize(current_player.name)}: "
+    end
+
     def show_play_table
       size_width = size.to_s.length
       col_label = "COLUMN".center(3*size)
@@ -300,7 +307,7 @@ module TicTacToe
 
     def flash text
       print "\r\e[A" + " " * term_width
-      print "\r" + colorize(current_player.name) + ": "
+      prompt
       if COLOR == :off
         print text
       else
