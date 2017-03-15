@@ -8,9 +8,16 @@ on your terminal.
 
 ## Play it
 
-    $ t3
+    $ t3  
 
 ![Play Screenshot](https://raw.githubusercontent.com/styd/TicTacToe/master/screenshot/play.gif)
+
+## Try other options
+Such as:
+
+    $ t3 4  
+    $ t3 3 "['a','b']"  
+    $ t3 5 "['x','o']" "['Andre','Beta']"  
 
 ## Contributing
 
