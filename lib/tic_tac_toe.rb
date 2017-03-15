@@ -10,10 +10,10 @@ module TicTacToe
   # STYLE = :off # Use this if your terminal output looks gibberish if STYLE == :on
 
   class Player
-    STYLE_SET = [*(31..36)].cycle
+    COLOR_SET = [*(31..36)].cycle
 
     @@num_of_registered_players = 0
-    @@color = STYLE_SET.each
+    @@color = COLOR_SET.each
 
     attr_reader :name, :symbol, :color
 
@@ -223,7 +223,7 @@ module TicTacToe
     # Screen related methods
     #
     def show_note
-      puts "Type: <#{italicize("row")}>,<#{italicize("column")}>"
+      puts dim("Type: <#{italicize("row")}>\,<#{italicize("column")}>")
       puts
     end
 
@@ -278,32 +278,37 @@ module TicTacToe
 
     def colorize text
       style text do
-        color = current_player.color
-        open = "\e[#{color}m"
+        current_player.color
       end
     end
 
     def italicize text
       style text do
-        open = "\e[3m"
+        3
       end
     end
 
     def boldize text
       style text do
-        open = "\e[1m"
+        1
+      end
+    end
+
+    def dim text
+      style text do
+        2
       end
     end
 
     def style text
       unless STYLE == :off
-        close = "\e[0m"
-        yield
-        text = "#{open}#{text}#{close}"
+        text = text.gsub(/\e\[0m/,"")
+        closing = "\e[0m"
+        opening_code = yield
+        text = "\e[#{opening_code}m#{text}#{closing}"
       end
       return text
     end
-
 
     def flash text
       print "\r\e[A" + " " * term_width

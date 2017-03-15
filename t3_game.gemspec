@@ -4,13 +4,13 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'tic_tac_toe/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "tictactoe_gem"
+  spec.name          = "t3_game"
   spec.version       = TicTacToe::VERSION
   spec.authors       = ["Adrian Setyadi"]
   spec.email         = ["a.styd@yahoo.com"]
 
   spec.summary       = %q{Tic Tac Toe on the terminal}
-  spec.description   = %q{Try to create a line horizontally, vertically, or diagonally with your symbol. Fun game!}
+  spec.description   = %q{Tic Tac Toe on the terminal. Fun game!}
   spec.homepage      = "https://github.com/styd/TicTacToe"
   spec.license       = "MIT"
 
