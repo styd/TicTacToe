@@ -4,7 +4,7 @@ on your terminal.
 
 ## Installation
 
-    $ gem install tictactoe_gem
+    $ gem install t3_game
 
 ## Play it
 
