@@ -6,14 +6,14 @@
 require "tic_tac_toe/version"
 
 module TicTacToe
-  COLOR = :on # Use this if your terminal supports text color
-  # COLOR = :off # Use this if your terminal output looks gibberish if COLOR == :on
+  STYLE = :on # Use this if your terminal supports text color
+  # STYLE = :off # Use this if your terminal output looks gibberish if STYLE == :on
 
   class Player
-    COLOR_SET = [*(31..36)].cycle
+    STYLE_SET = [*(31..36)].cycle
 
     @@num_of_registered_players = 0
-    @@color = COLOR_SET.each
+    @@color = STYLE_SET.each
 
     attr_reader :name, :symbol, :color
 
@@ -22,7 +22,7 @@ module TicTacToe
       @color = @@color.next
       @name = params[:name] || "Player " + @@num_of_registered_players.to_s
       symbol = params[:symbol]
-      @symbol = COLOR == :off ? symbol : "\e[#{color}m#{symbol}\e[0m"
+      @symbol = STYLE == :off ? symbol : "\e[#{color}m#{symbol}\e[0m"
     end
 
     def wins
@@ -160,17 +160,15 @@ module TicTacToe
         until pos_marked do
           refresh_screen
           show_play_table
-
-          puts "Type: <#{italicize("row")}>,<#{italicize("column")}>"
-          puts
-          print colorize(current_player.name) + ": "
+          show_note
+          prompt
           # Get input
           begin
             input = gets
             if input.nil? # Ctrl + D pressed
               raise Interrupt
             else
-              typed_text = input.chomp
+              typed_text = input.chomp.strip
             end
           rescue SystemExit, Interrupt # Ctrl + C pressed or program/ruby failure
             forced_to_quit
@@ -224,6 +222,15 @@ module TicTacToe
     #
     # Screen related methods
     #
+    def show_note
+      puts "Type: <#{italicize("row")}>,<#{italicize("column")}>"
+      puts
+    end
+
+    def prompt
+      print "\r #{colorize(current_player.name)}: "
+    end
+
     def show_play_table
       size_width = size.to_s.length
       col_label = "COLUMN".center(3*size)
@@ -239,7 +246,7 @@ module TicTacToe
         print " #{italicize(row_label[rnum-1])}"
         print " #{boldize(rnum.to_s.rjust(size_width))} "
         row.each do |el|
-          if COLOR == :off
+          if STYLE == :off
             print "[#{el || " "}]"
           else
             print el ? "[#{el || " "}]\e[0m" : "[#{el || " "}]"
@@ -270,38 +277,38 @@ module TicTacToe
     end
 
     def colorize text
-      if COLOR == :off
-        return text
-      else
+      style text do
         color = current_player.color
-        return "\e[#{color}m#{text}\e[0m"
+        open = "\e[#{color}m"
       end
     end
 
     def italicize text
-      if COLOR == :off
-        return text
-      else
+      style text do
         open = "\e[3m"
-        close = "\e[0m"
-        return "#{open}#{text}#{close}"
       end
     end
 
     def boldize text
-      if COLOR == :off
-        return text
-      else
+      style text do
         open = "\e[1m"
-        close = "\e[0m"
-        return "#{open}#{text}#{close}"
       end
     end
 
+    def style text
+      unless STYLE == :off
+        close = "\e[0m"
+        yield
+        text = "#{open}#{text}#{close}"
+      end
+      return text
+    end
+
+
     def flash text
       print "\r\e[A" + " " * term_width
-      print "\r" + colorize(current_player.name) + ": "
-      if COLOR == :off
+      prompt
+      if STYLE == :off
         print text
       else
         print "\e[33m#{text}\e[0m"

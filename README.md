@@ -8,9 +8,10 @@ on your terminal.
 
 ## Play it
 
-    $ ttt
+    $ t3
 
 ![Play Screenshot](https://raw.githubusercontent.com/styd/TicTacToe/master/screenshot/play.gif)
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/styd/TicTacToe. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
